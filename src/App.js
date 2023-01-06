@@ -4,6 +4,7 @@ import { Products } from "./pages/Products/Products";
 import { Product } from "./pages/Product/Product";
 import { Navbar } from "./components/Navbar/Navbar";
 import { Footer } from "./components/Footer/Footer";
+import "./app.scss";
 
 const Layout = () => {
   return (
@@ -19,20 +20,20 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    children:[
+    children: [
       {
-        path:'/',
-        element:<Home/>
+        path: "/",
+        element: <Home />,
       },
       {
-        path:'/products/:id',
-        element:<Products/>
+        path: "/products/:id",
+        element: <Products />,
       },
       {
-        path:'/product/:id',
-        element:<Product/>
-      }
-    ]
+        path: "/product/:id",
+        element: <Product />,
+      },
+    ],
   },
 ]);
 
