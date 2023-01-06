@@ -8,24 +8,31 @@ import { Footer } from "./components/Footer/Footer";
 const Layout = () => {
   return (
     <div className="app">
-      <Navbar/>
-      <Footer/>
+      <Navbar />
+      <Outlet />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/products/:id",
-    element: <Products />,
-  },
-  {
-    path: "/product/:id",
-    element: <Product />,
+    element: <Layout />,
+    children:[
+      {
+        path:'/',
+        element:<Home/>
+      },
+      {
+        path:'/products/:id',
+        element:<Products/>
+      },
+      {
+        path:'/product/:id',
+        element:<Product/>
+      }
+    ]
   },
 ]);
 
