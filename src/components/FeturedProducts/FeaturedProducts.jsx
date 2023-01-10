@@ -16,7 +16,7 @@ export const FeaturedProducts = ({ type }) => {
     {
       id: 2,
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIRyuGHeoCNCKykdmbImNwMwJm_9GPRr59fajOTYVIzuDS9rOJkawGlMiqQO9j0boMSZ0&usqp=CAU",
-      title: "Long Sleeve Graphic T-shirt",
+      title: "coat",
       isNew: true,
       oldPrice: 19,
       price: 12,
@@ -24,7 +24,7 @@ export const FeaturedProducts = ({ type }) => {
     {
       id: 3,
       img: "https://img.alicdn.com/imgextra/i2/2200788949915/O1CN01Prp7cl2N77cy35xlp_!!2200788949915.jpg",
-      title: "Long Sleeve Graphic T-shirt",
+      title: "Skirt",
       isNew: true,
       oldPrice: 19,
       price: 12,
@@ -32,7 +32,7 @@ export const FeaturedProducts = ({ type }) => {
     {
       id: 4,
       img: "https://ae04.alicdn.com/kf/Hb750f1aad4a34fa380ea72dbbf9bbc3bx/Li-Ning.jpg",
-      title: "Long Sleeve Graphic T-shirt",
+      title: "Hat",
       isNew: true,
       oldPrice: 19,
       price: 12,
