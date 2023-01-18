@@ -23,7 +23,7 @@ export const Categories = () => {
             alt=""
           />
           <button>
-            <Link className="link" to="/producs/1">
+            <Link className="link" to="/products/1">
               Women
             </Link>
           </button>
@@ -36,7 +36,7 @@ export const Categories = () => {
             alt=""
           />
           <button>
-            <Link className="link" to="/producs/1">
+            <Link className="link" to="/products/1">
               New Season
             </Link>
           </button>
@@ -51,7 +51,7 @@ export const Categories = () => {
                 alt=""
               />
               <button>
-                <Link className="link" to="/producs/1">
+                <Link className="link" to="/products/1">
                   Man
                 </Link>
               </button>
@@ -64,7 +64,7 @@ export const Categories = () => {
                 alt=""
               />
               <button>
-                <Link className="link" to="/producs/1">
+                <Link className="link" to="/products/1">
                   Accessories
                 </Link>
               </button>
@@ -77,7 +77,7 @@ export const Categories = () => {
             alt=""
           />
           <button>
-            <Link className="link" to="/producs/1">
+            <Link className="link" to="/products/1">
               Shoes
             </Link>
           </button>
