@@ -41,7 +41,7 @@ export const Navbar = () => {
         </div>
         <div className="center">
           <Link className="link" to="/">
-            LINING
+            LI-NING
           </Link>
         </div>
         <div className="right">
