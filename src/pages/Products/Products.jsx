@@ -15,8 +15,14 @@ export const Products = () => {
   );
 
   const handleChange = (e) => {
-    const value = e.target.value
-    const checked = e.target.value
+    const value = e.target.value;
+    const isChecked = e.target.value;
+
+    setSelectedSubCats(
+      isChecked
+        ? [...selectedSubCats, value]
+        : selectedSubCats.filter((item) => item !== value)
+    );
   };
 
   return (
@@ -79,7 +85,7 @@ export const Products = () => {
           src="http://desempacados.com/wp-content/uploads/2019/09/Lining-3-1.jpg"
           alt=""
         />
-        <List catId={catId} maxPrice={maxPrice} sort={sort} />
+        <List catId={catId} maxPrice={maxPrice} sort={sort} subCats={selectedSubCats}/>
       </div>
     </div>
   );
