@@ -1,11 +1,6 @@
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 ("use strict");
-
-/**
- * order controller
- */
-
 const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController("api::order.order", ({ strapi }) => ({
@@ -13,10 +8,10 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
     const { products } = ctx.request.body;
 
     const lineItems = await Promise.all(
-      products.map(async (item) => {
+      products.map(async (product) => {
         const item = await strapi
-          .service("api:product.product")
-          .findOne(item.id);
+          .service("api::product.product")
+          .findOne(product.id);
 
         return {
           price_data: {
@@ -32,7 +27,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
     );
 
     try {
-      const session = strapi.checkout.create({
+      const session = await stripe.checkout.sessions.create({
         mode: "payment",
         success_url: `${process.env.CLIENT_URL}?success=true`,
         cancel_url: `${process.env.CLIENT_URL}?success=false`,
