@@ -1,50 +1,70 @@
 import React from "react";
 import "./Cart.scss";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem, resetCart } from "../../redux/cartReducer";
+import { makeRequest } from "../../makeRequest";
+import { loadStripe } from "@stripe/stripe-js";
 
 export const Cart = () => {
-  const data = [
-    {
-      id: 1,
-      img: "https://img.alicdn.com/imgextra/i3/92688455/O1CN01zUWToT2CKROJ2Obe5_!!0-item_pic.jpg",
-      img2: "https://img5.lalafo.com/i/posters/original/ea/7f/5e/3759b03d6d7fad8b7cbe100aa1.jpeg",
-      title: "Long Sleeve Graphic T-shirt",
-      desc: "Long Sleeve Graphic T-shirt",
-      isNew: true,
-      oldPrice: 19,
-      price: 12,
-    },
-    {
-      id: 2,
-      img: "https://img.alicdn.com/imgextra/i3/3586957598/O1CN01ZEJAlv25zvsgEZI0P_!!3586957598.jpg",
-      img2: "https://img.alicdn.com/imgextra/i3/3586957598/O1CN01Au9QhL25zvseovcaz_!!0-item_pic.jpg",
-      title: "coat",
-      desc: "coat",
-      isNew: true,
-      oldPrice: 19,
-      price: 12,
-    },
-  ];
+  const products = useSelector((state) => state.cart.products);
+  const dispatch = useDispatch();
+
+  const totalPrice = () => {
+    let total = 0;
+    products.forEach((item) => {
+      total += item.quantity * item.price;
+    });
+    return total.toFixed(2);
+  };
+
+  const stripePromise = loadStripe(
+    "pk_test_51MUvBFEmCVqdfRpjWD9AznQ0iZOyXMX9ZOserlBKS1PkfUazUdTPn6NC6TN3SeMNbIYLPyRPlvmDzG1cOZAkM5AR00bZkj6b09"
+  );
+
+  const handlePayment = async () => {
+    try {
+      const stripe = await stripePromise;
+
+      const res = await makeRequest.post("/orders", {
+        products,
+      });
+
+      await stripe.redirectToCheckout({
+        sessionId: res.data.stripeSession.id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="cart">
       <h1>Products in your cart</h1>
-      {data?.map((item) => (
+      {products?.map((item) => (
         <div className="item" key={item.id}>
-          <img src={item.id} alt="" />
+          <img src={process.env.REACT_APP_UPLOAD_URL + item.img} alt="" />
           <div className="details">
             <h1>{item.title}</h1>
             <p>{item.desc?.substring(0, 100)}</p>
-            <div className="price">1 x ${item.price}</div>
+            <div className="price">
+              {item.quantity} x ${item.price}
+            </div>
           </div>
-          <DeleteOutlinedIcon className="delete" />
+          <DeleteOutlinedIcon
+            className="delete"
+            onClick={() => dispatch(removeItem(item.id))}
+          />
         </div>
       ))}
       <div className="total">
         <span>SUBTOTAL</span>
-        <span>$123</span>
+        <span>${totalPrice()}</span>
       </div>
-      <button>PROCEED TO CHECKOUT</button>
-      <span className="reset">Reset Cart</span>
+      <button onClick={handlePayment}>PROCEED TO CHECKOUT</button>
+      <span className="reset" onClick={() => dispatch(resetCart())}>
+        Reset Cart
+      </span>
     </div>
   );
 };

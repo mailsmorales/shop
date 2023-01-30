@@ -13,8 +13,13 @@
     "@strapi/plugin-i18n": "4.5.6",
     "@strapi/plugin-users-permissions": "4.5.6",
     "@strapi/strapi": "4.5.6",
+    "@stripe/react-stripe-js": "^1.16.4",
+    "@stripe/stripe-js": "^1.46.0",
+    "install": "^0.13.0",
     "mysql": "^2.18.1",
-    "mysql2": "^3.0.1"
+    "mysql2": "^3.0.1",
+    "npm": "^9.4.0",
+    "stripe": "^11.8.0"
   },
   "author": {
     "name": "A Strapi developer"
